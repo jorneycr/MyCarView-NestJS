@@ -1,28 +1,37 @@
-import { AfterInsert, AfterRemove, AfterUpdate, Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
+import { Exclude } from 'class-transformer';
+import {
+  AfterInsert,
+  AfterRemove,
+  AfterUpdate,
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class User {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    email: string;
+  @Column()
+  email: string;
 
-    @Column()
-    password: string;
+  @Column()
+  @Exclude()
+  password: string;
 
-    @AfterInsert()
-    logInsert() {
-        console.log('Inserted!!!', this.id);
-    }
+  @AfterInsert()
+  logInsert() {
+    console.log('Inserted!!!', this.id);
+  }
 
-    @AfterUpdate()
-    logUpdate() {
-        console.log('Updated!!!', this.id);
-    }
+  @AfterUpdate()
+  logUpdate() {
+    console.log('Updated!!!', this.id);
+  }
 
-    @AfterRemove()
-    logRemove() {
-        console.log('Removed!!!', this.id);
-    }
+  @AfterRemove()
+  logRemove() {
+    console.log('Removed!!!', this.id);
+  }
 }
