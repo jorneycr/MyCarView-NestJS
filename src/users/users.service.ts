@@ -8,7 +8,7 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private repo: Repository<User>,
-  ) {}
+  ) { }
 
   create(email: string, password: string) {
     const user = this.repo.create({ email, password });
@@ -16,6 +16,9 @@ export class UsersService {
   }
 
   findOne(id: number) {
+    if (!id) {
+      return null;
+    }
     return this.repo.findOneBy({ id });
   }
 
