@@ -1,3 +1,4 @@
+import { AuthService } from './auth.service';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dtos/create-user.dto';
 import {
@@ -19,12 +20,15 @@ import { UserDto } from './dtos/user.dto';
 @Controller('auth')
 @Serialize(UserDto)
 export class UsersController {
-    constructor(private usersService: UsersService) { }
+    constructor(
+        private usersService: UsersService,
+        private authService: AuthService,
+    ) { }
 
     @Post('/signup')
     createUser(@Body() createUserDto: CreateUserDto) {
         const { email, password } = createUserDto;
-        this.usersService.create(email, password);
+        return this.authService.signup(email, password);
     }
 
     @Get('/:id')
