@@ -23,7 +23,8 @@ const cookieSession = require('cookie-session');
           type: 'sqlite',
           database: config.get<string>('DB_NAME'),
           synchronize: true,
-          entities: [User, Report]
+          entities: [User, Report],
+          dropSchema: config.get<string>('DB_NAME') === 'test.sqlite' ? true : false,
         };
       },
     }),
