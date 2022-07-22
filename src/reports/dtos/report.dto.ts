@@ -1,3 +1,4 @@
+import { APP_INTERCEPTOR } from '@nestjs/core';
 import { Expose, Transform } from "class-transformer";
 
 export class ReportDto {
@@ -17,6 +18,9 @@ export class ReportDto {
     model: string;
     @Expose()
     mileage: number;
+    @Expose()
+    approved: boolean;
+
     @Transform(({ obj }) => obj.user.id)
     @Expose()
     userId: number;
