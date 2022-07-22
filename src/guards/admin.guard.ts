@@ -1,4 +1,3 @@
-import { CurrrentUser } from './../users/decorators/current-user.decorator';
 import { CanActivate, ExecutionContext } from '@nestjs/common';
 
 export class AdminGuard implements CanActivate {
