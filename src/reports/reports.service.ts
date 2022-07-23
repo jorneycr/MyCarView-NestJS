@@ -1,3 +1,4 @@
+import { GetEstimateDto } from './dtos/get-estimate.dto';
 import { User } from '../users/user.entity';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -23,5 +24,12 @@ export class ReportsService {
 
         report.approved = approved;
         return this.repo.save(report);
+    }
+
+    createEstimate(estimate: GetEstimateDto) {
+        return this.repo.createQueryBuilder()
+            .select('*')
+            .where('make= :make', { make: estimate.make })
+            .getRawMany();
     }
 }
