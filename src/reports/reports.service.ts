@@ -26,10 +26,15 @@ export class ReportsService {
         return this.repo.save(report);
     }
 
-    createEstimate(estimate: GetEstimateDto) {
+    createEstimate({ make, model, year, mileage }: GetEstimateDto) {
         return this.repo.createQueryBuilder()
             .select('*')
-            .where('make= :make', { make: estimate.make })
+            .where('make= :make', { make })
+            .andWhere('model= :model', { model })
+            .andWhere('year= :year BETWEEN -3 AND 3', { year })
+            .orderBy('ABS(mileage - :mileage)', 'DESC')
+            .setParameters({ mileage })
+            .limit(2)
             .getRawMany();
     }
 }
