@@ -1,4 +1,4 @@
-import { UsersService } from './../users.service';
+import { UsersService } from '../users.service';
 import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from "@nestjs/common";
 
 @Injectable()
